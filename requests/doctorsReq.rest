@@ -1,0 +1,31 @@
+// Doctors requests
+GET http://localhost:5500/dashboard/doctors
+###
+
+POST http://localhost:5500/dashboard/doctors
+Content-Type: application/json
+
+{
+    "firstname": "DoctorA",
+    "surname": "DoctorA",
+    "speciality": "hematology",
+    "hospital_id": "2"
+}
+###
+
+GET http://localhost:5500/dashboard/doctors/1
+###
+
+PUT http://localhost:5500/dashboard/doctors/1
+Content-Type: application/json
+
+{
+    "firstname": "DoctorA",
+    "surname": "DoctorA",
+    "speciality": "oncology",
+    "hospital_id": "1"
+}
+###
+
+DELETE http://localhost:5500/dashboard/doctors/1
+###
