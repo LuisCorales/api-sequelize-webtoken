@@ -4,29 +4,13 @@ const Moment = require('moment');
 const MomentRange = require('moment-range');
 const moment = MomentRange.extendMoment(Moment);
 
-/** If there is an error, send to response */
-const sendError = (res, e) => {
-    return res.status(500).json({
-        message: 'There was a problem...',
-        error: e.message
-    });
-};
-
-/** Send the result of each request if successful */
-const sendResult = (res, message, result) => {
-    return res.status(200).json({
-        message: message,
-        result: result
-    });
-};
-
 /** Asign doctor speciality and appointment duration by patient's pathology 
  * @param pathology The pathology of the patient 
  * */
 const asingDoctorAndDuration = (pathology) => {
-    var speciality;
-    var duration;
-    var str = pathology.toLowerCase();
+    const speciality;
+    const duration;
+    const str = pathology.toLowerCase();
 
     switch (str) {
         case "cancer":
@@ -71,12 +55,12 @@ const checkIfDatesOverlap = (startTimeNew, endTimeNew, id, otherDates) => {
 
     // For each appointment with the same doctor, check dates
     for (let i = 0; i < otherDates.length; i++) {
-        let dateStart = moment(otherDates[i].startTime);
-        let dateEnd = moment(otherDates[i].endTime);
-        let dateId = moment(otherDates[i].id);
+        const dateStart = moment(otherDates[i].startTime);
+        const dateEnd = moment(otherDates[i].endTime);
+        const dateId = moment(otherDates[i].id);
 
-        var range1 = moment().range(dateStart, dateEnd);
-        var range2 = moment().range(startTimeNew, endTimeNew);
+        const range1 = moment().range(dateStart, dateEnd);
+        const range2 = moment().range(startTimeNew, endTimeNew);
 
         // If it's trying to update the same appointment, don't check
         if(dateId != id){
@@ -94,7 +78,7 @@ const checkIfDatesOverlap = (startTimeNew, endTimeNew, id, otherDates) => {
 /** To GET appointments route */
 module.exports.getAll = async (req, res) => {
     try{
-        let result = await Appointment.findAll({
+        const result = await Appointment.findAll({
             include: [
                 {
                     association: "doctor",
@@ -108,57 +92,57 @@ module.exports.getAll = async (req, res) => {
             ]
         });
 
-        sendResult(res, `GET request to ${req.originalUrl}`, result);
+        return res.status(200);
     } catch(e) {
-        sendError(res, e);
+        return res.status(500);
     }
 }
 
 /** To POST appointments route */
 module.exports.post = async (req, res) => {
     try{
-        let patient = await Patient.findByPk(req.body.patient_id);
-        let speciality_duration = asingDoctorAndDuration(patient.dataValues.pathology);
-        let doctor = await Doctor.findOne({
+        const patient = await Patient.findByPk(req.body.patient_id);
+        const speciality_duration = asingDoctorAndDuration(patient.dataValues.pathology);
+        const doctor = await Doctor.findOne({
             where: {
                 speciality: speciality_duration[0]
             }
         });
-        let doctor_id = doctor.dataValues.id;
+        const doctor_id = doctor.dataValues.id;
 
-        let end_time = moment(moment(req.body.start_time), "hh:mm:ss").add(speciality_duration[1], 'minutes');
+        const end_time = moment(moment(req.body.start_time), "hh:mm:ss").add(speciality_duration[1], 'minutes');
 
-        let otherDates = await Appointment.findAll({
+        const otherDates = await Appointment.findAll({
             attributes: ['start_time', 'end_time', 'id'],
             where: {
                 doctor_id: doctor_id
             }
         });
 
-        let overlaps = checkIfDatesOverlap(moment(req.body.start_time), moment(end_time), 0, otherDates);
+        const overlaps = checkIfDatesOverlap(moment(req.body.start_time), moment(end_time), 0, otherDates);
 
         if(overlaps[0]) {
             // If dates overlap send all doctors date as response
             throw new Error(overlaps[1]);
         } 
 
-        let result = await Appointment.create({
+        const result = await Appointment.create({
             start_time: req.body.start_time,
             end_time: end_time,
             doctor_id: doctor_id,
             patient_id: req.body.patient_id
         });
 
-        sendResult(res, `POST request to ${req.originalUrl}`, result);
+        return res.status(200);
     } catch(e) {
-        sendError(res, e);
+        return res.status(500);
     }
 }
 
 /** To GET one appointment by id route */
 module.exports.getAppointment = async (req, res) => {
     try{
-        let result = await Appointment.findByPk(req.params.appointmentId, {
+        const result = await Appointment.findByPk(req.params.appointmentId, {
             include: [
                 {
                     association: "doctor",
@@ -172,16 +156,16 @@ module.exports.getAppointment = async (req, res) => {
             ]
         });
 
-        sendResult(res, `GET request to ${req.originalUrl}`, result);
+        return res.status(200);
     } catch(e) {
-        sendError(res, e);
+        return res.status(500);
     }
 }
 
 /** To GET appointments of a doctor by id route */
 module.exports.getOneDoctorAppointments = async (req, res) => {
     try{
-        let result = await Appointment.findAll({
+        const result = await Appointment.findAll({
             include: [
                 {
                     association: "doctor",
@@ -198,41 +182,41 @@ module.exports.getOneDoctorAppointments = async (req, res) => {
             }
         });
 
-        sendResult(res, `GET request to ${req.originalUrl}`, result);
+        return res.status(200);
     } catch(e) {
-        sendError(res, e);
+        return res.status(500);
     }
 }
 
 /** To PUT appointments route */
 module.exports.put = async (req, res) => {
     try{
-        let patient = await Patient.findByPk(req.body.patient_id);
-        let speciality_duration = asingDoctorAndDuration(patient.dataValues.pathology);
-        let doctor = await Doctor.findOne({
+        const patient = await Patient.findByPk(req.body.patient_id);
+        const speciality_duration = asingDoctorAndDuration(patient.dataValues.pathology);
+        const doctor = await Doctor.findOne({
             where: {
                 speciality: speciality_duration[0]
             }
         });
-        let doctor_id = doctor.dataValues.id;
+        const doctor_id = doctor.dataValues.id;
 
-        let end_time = moment(moment(req.body.start_time), "hh:mm:ss").add(speciality_duration[1], 'minutes');
+        const end_time = moment(moment(req.body.start_time), "hh:mm:ss").add(speciality_duration[1], 'minutes');
 
-        let otherDates = await Appointment.findAll({
+        const otherDates = await Appointment.findAll({
             attributes: ['start_time', 'end_time', 'id'],
             where: {
                 doctor_id: doctor_id
             }
         });
 
-        let overlaps = checkIfDatesOverlap(moment(req.body.start_time), moment(end_time), req.params.appointmentId, otherDates);
+        const overlaps = checkIfDatesOverlap(moment(req.body.start_time), moment(end_time), req.params.appointmentId, otherDates);
 
         if(overlaps[0]) {
             // If dates overlap
             throw new Error(overlaps[1]);
         } 
 
-        let result = await Appointment.update({
+        const result = await Appointment.update({
             start_time: req.body.start_time,
             end_time: end_time,
             doctor_id: doctor_id,
@@ -243,23 +227,23 @@ module.exports.put = async (req, res) => {
             }
         });
 
-        sendResult(res, `PUT request to ${req.originalUrl}`, `Updated rows: ${result}`);
+        return res.status(200);
     } catch(e) {
-        sendError(res, e);
+        return res.status(500);
     }
 }
 
 /** To DELETE appointments route */
 module.exports.delete = async (req, res) => {
     try{
-        let result = await Appointment.destroy({
+        const result = await Appointment.destroy({
             where: {
                 id: req.params.appointmentId
             }
         });
 
-        sendResult(res, `DELETE request to ${req.originalUrl}`, `Deleted ${result} row`);
+        return res.status(200);
     } catch(e) {
-        sendError(res, e);
+        return res.status(500);
     }
 }

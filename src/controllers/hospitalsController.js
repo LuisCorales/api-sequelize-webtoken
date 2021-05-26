@@ -1,60 +1,44 @@
 const { Hospital } = require('../db/models/index');
 
-/** If there is an error, send to response */
-const sendError = (res, e) => {
-    return res.status(404).json({
-        message: 'There was a problem...',
-        error: e.message
-    });
-};
-
-/** Send the result of each request if successful */
-const sendResult = (res, message, result) => {
-    return res.status(200).json({
-        message: message,
-        result: result
-    });
-};
-
 /** To GET hospitals route */
 module.exports.getAll = async (req, res) => {
     try{
-        let result = await Hospital.findAll();
+        const result = await Hospital.findAll();
 
-        sendResult(res, `GET request to ${req.originalUrl}`, result);
+        return res.status(200);
     } catch(e) {
-        sendError(res, e);
+        return res.status(500);
     }
 }
 
 /** To POST hospitals route */
 module.exports.post = async (req, res) => {
     try{    
-        let result = await Hospital.create({
+        const result = await Hospital.create({
             name: req.body.name
         });
 
-        sendResult(res, `POST request to ${req.originalUrl}`, result);
+        return res.status(200);
     } catch(e) {
-        sendError(res, e);
+        return res.status(500);
     }
 }
 
 /** To GET hospitals by id route */
 module.exports.getOne = async (req, res) => {
     try{
-        let result = await Hospital.findByPk(req.params.id);
+        const result = await Hospital.findByPk(req.params.id);
 
-        sendResult(res, `GET request to ${req.originalUrl}`, result);
+        return res.status(200);
     } catch(e) {
-        sendError(res, e);
+        return res.status(500);
     }
 }
 
 /** To PUT hospitals route */
 module.exports.put = async (req, res) => {
     try{
-        let result = await Hospital.update({
+        const result = await Hospital.update({
             name: req.body.name
         }, {
             where: {
@@ -62,23 +46,23 @@ module.exports.put = async (req, res) => {
             }
         });
 
-        sendResult(res, `PUT request to ${req.originalUrl}`, `Updated ${result} row`);
+        return res.status(200);
     } catch(e) {
-        sendError(res, e);
+        return res.status(500);
     }
 }
 
 /** To DELETE hospitals route */
 module.exports.delete = async (req, res) => {
     try{
-        let result = await Hospital.destroy({
+        const result = await Hospital.destroy({
             where: {
                 id: req.params.id
             }
         });
 
-        sendResult(res, `DELETE request to ${req.originalUrl}`, `Deleted ${result} row`);
+        return res.status(200);
     } catch(e) {
-        sendError(res, e);
+        return res.status(500);
     }
 }
