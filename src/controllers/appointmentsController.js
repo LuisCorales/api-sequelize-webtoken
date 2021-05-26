@@ -8,9 +8,9 @@ const moment = MomentRange.extendMoment(Moment);
  * @param pathology The pathology of the patient 
  * */
 const asingDoctorAndDuration = (pathology) => {
-    const speciality;
-    const duration;
-    const str = pathology.toLowerCase();
+    var speciality;
+    var duration;
+    var str = pathology.toLowerCase();
 
     switch (str) {
         case "cancer":
@@ -92,9 +92,9 @@ module.exports.getAll = async (req, res) => {
             ]
         });
 
-        return res.status(200);
+        return res.status(200).send("");
     } catch(e) {
-        return res.status(500);
+        return res.status(500).send("");
     }
 }
 
@@ -133,9 +133,9 @@ module.exports.post = async (req, res) => {
             patient_id: req.body.patient_id
         });
 
-        return res.status(200);
+        return res.status(200).send("");
     } catch(e) {
-        return res.status(500);
+        return res.status(500).send("");
     }
 }
 
@@ -156,9 +156,9 @@ module.exports.getAppointment = async (req, res) => {
             ]
         });
 
-        return res.status(200);
+        return res.status(200).send("");
     } catch(e) {
-        return res.status(500);
+        return res.status(500).send("");
     }
 }
 
@@ -182,9 +182,9 @@ module.exports.getOneDoctorAppointments = async (req, res) => {
             }
         });
 
-        return res.status(200);
+        return res.status(200).send("");
     } catch(e) {
-        return res.status(500);
+        return res.status(500).send("");
     }
 }
 
@@ -227,9 +227,9 @@ module.exports.put = async (req, res) => {
             }
         });
 
-        return res.status(200);
+        return res.status(200).send("");
     } catch(e) {
-        return res.status(500);
+        return res.status(500).send("");
     }
 }
 
@@ -242,8 +242,8 @@ module.exports.delete = async (req, res) => {
             }
         });
 
-        return res.status(200);
+        return res.status(200).send("");
     } catch(e) {
-        return res.status(500);
+        return res.status(500).send("");
     }
 }

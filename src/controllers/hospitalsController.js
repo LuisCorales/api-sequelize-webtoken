@@ -5,9 +5,9 @@ module.exports.getAll = async (req, res) => {
     try{
         const result = await Hospital.findAll();
 
-        return res.status(200);
+        return res.status(200).send("");
     } catch(e) {
-        return res.status(500);
+        return res.status(500).send("");
     }
 }
 
@@ -18,9 +18,9 @@ module.exports.post = async (req, res) => {
             name: req.body.name
         });
 
-        return res.status(200);
+        return res.status(200).send("");
     } catch(e) {
-        return res.status(500);
+        return res.status(500).send("");
     }
 }
 
@@ -29,9 +29,9 @@ module.exports.getOne = async (req, res) => {
     try{
         const result = await Hospital.findByPk(req.params.id);
 
-        return res.status(200);
+        return res.status(200).send("");
     } catch(e) {
-        return res.status(500);
+        return res.status(500).send("");
     }
 }
 
@@ -46,9 +46,9 @@ module.exports.put = async (req, res) => {
             }
         });
 
-        return res.status(200);
+        return res.status(200).send("");
     } catch(e) {
-        return res.status(500);
+        return res.status(500).send("");
     }
 }
 
@@ -61,8 +61,8 @@ module.exports.delete = async (req, res) => {
             }
         });
 
-        return res.status(200);
+        return res.status(200).send("");
     } catch(e) {
-        return res.status(500);
+        return res.status(500).send("");
     }
 }
