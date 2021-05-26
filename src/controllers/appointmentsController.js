@@ -122,7 +122,7 @@ module.exports.post = async (req, res) => {
         const overlaps = checkIfDatesOverlap(moment(req.body.start_time), moment(end_time), 0, otherDates);
 
         if(overlaps[0]) {
-            // If dates overlap send all doctors date as response
+            // If dates overlap, throw error
             throw new Error(overlaps[1]);
         } 
 
@@ -212,7 +212,7 @@ module.exports.put = async (req, res) => {
         const overlaps = checkIfDatesOverlap(moment(req.body.start_time), moment(end_time), req.params.appointmentId, otherDates);
 
         if(overlaps[0]) {
-            // If dates overlap
+            // If dates overlap, throw error
             throw new Error(overlaps[1]);
         } 
 
