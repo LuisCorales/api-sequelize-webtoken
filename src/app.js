@@ -10,7 +10,7 @@ const { sequelize } = require('./db/models/index');
 app.set("port", 5500);
 const port = app.set("port");
 
-// TODO: Get all new routes
+// Get all routes
 app.use('/', require('./routes'));
 
 // If not fitting route was found, then display error
