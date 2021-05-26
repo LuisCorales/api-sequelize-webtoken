@@ -52,7 +52,6 @@ module.exports = {
         type: Sequelize.STRING(100),
       },
     }, {
-      timestamps: false,
       paranoid: true,
       underscored: true,
     });

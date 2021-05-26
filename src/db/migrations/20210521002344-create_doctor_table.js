@@ -56,7 +56,6 @@ module.exports = {
         }
       }
     }, {
-      timestamps: false,
       paranoid: true,
       underscored: true,
     });

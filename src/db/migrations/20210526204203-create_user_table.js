@@ -2,23 +2,28 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('hospitals', {
+    await queryInterface.createTable('users', {
       id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true,
         allowNull: false
       },
-      name: {
+      username: {
         type: Sequelize.STRING,
         allowNull: false,
         validate: {
-          len: {
-            args: [3, 60],
-            msg: "name can only have from 3 to 60 letters."
-          },
           notNull: {
-            msg: "name cannot be null."
+            msg: "username cannot be null."
+          }
+        }
+      },
+      password: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: "username cannot be null."
           }
         }
       },
@@ -29,6 +34,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('hospitals');
+    await queryInterface.dropTable('users');
   }
 };
