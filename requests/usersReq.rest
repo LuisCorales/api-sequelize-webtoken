@@ -1,0 +1,13 @@
+// Users requests tests
+GET http://localhost:5500/dashboard/users
+Authorization: Bearer 
+###
+
+POST http://localhost:5500/dashboard/users
+Content-Type: application/json
+
+{
+    "username": "user",
+    "password": "password"
+}
+###
