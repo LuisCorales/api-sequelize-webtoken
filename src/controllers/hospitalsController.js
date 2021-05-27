@@ -61,7 +61,7 @@ module.exports.delete = async (req, res) => {
             }
         });
 
-        return res.status(200).send(result);
+        return res.sendStatus(200);
     } catch(e) {
         return res.sendStatus(500);
     }
