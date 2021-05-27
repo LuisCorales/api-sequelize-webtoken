@@ -62,8 +62,9 @@ const checkIfDatesOverlap = (startTimeNew, endTimeNew, id, otherDates) => {
         const range1 = moment().range(dateStart, dateEnd);
         const range2 = moment().range(startTimeNew, endTimeNew);
 
-        // If it's trying to update the same appointment, don't check
+        // Only check dates where the id is different
         if(dateId != id){
+            // If at least one is overlapping, then return true
             if((range1.contains(startTimeNew) && range1.contains(endTimeNew)) 
             || (range2.contains(dateStart) || range2.contains(dateEnd))) {
                 // Overlap
@@ -92,9 +93,9 @@ module.exports.getAll = async (req, res) => {
             ]
         });
 
-        return res.status(200).send("");
+        return res.status(200).send(result);
     } catch(e) {
-        return res.status(500).send("");
+        return res.sendStatus(500);
     }
 }
 
@@ -133,9 +134,9 @@ module.exports.post = async (req, res) => {
             patient_id: req.body.patient_id
         });
 
-        return res.status(200).send("");
+        return res.status(200).send(result);
     } catch(e) {
-        return res.status(500).send("");
+        return res.sendStatus(500);
     }
 }
 
@@ -156,9 +157,9 @@ module.exports.getAppointment = async (req, res) => {
             ]
         });
 
-        return res.status(200).send("");
+        return res.status(200).send(result);
     } catch(e) {
-        return res.status(500).send("");
+        return res.sendStatus(500);
     }
 }
 
@@ -182,9 +183,9 @@ module.exports.getOneDoctorAppointments = async (req, res) => {
             }
         });
 
-        return res.status(200).send("");
+        return res.status(200).send(result);
     } catch(e) {
-        return res.status(500).send("");
+        return res.sendStatus(500);
     }
 }
 
@@ -227,9 +228,9 @@ module.exports.put = async (req, res) => {
             }
         });
 
-        return res.status(200).send("");
+        return res.status(200).send(result);
     } catch(e) {
-        return res.status(500).send("");
+        return res.sendStatus(500);
     }
 }
 
@@ -244,6 +245,6 @@ module.exports.delete = async (req, res) => {
 
         return res.status(200).send("");
     } catch(e) {
-        return res.status(500).send("");
+        return res.sendStatus(500);
     }
 }
