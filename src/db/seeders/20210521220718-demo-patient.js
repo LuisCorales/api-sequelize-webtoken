@@ -6,7 +6,7 @@ module.exports = {
       firstname: 'PatientA',
       surname: 'PatientA',
       id_document: '111',
-      pathology: 'flu'
+      pathology: 'flu',
     }, {
       firstname: 'PatientB',
       surname: 'PatientB',
