@@ -13,11 +13,9 @@ const port = app.set("port");
 // Get all routes
 app.use('/', require('./routes'));
 
-// If not fitting route was found, then display error
+// If not fitting route was found, send error
 app.use((req, res) => {
-    return res.status(500).json({
-        error: "Type of request not found: " + req.url
-    });
+    return res.sendStatus(404);
 });
 
 // Set up and run the API server
