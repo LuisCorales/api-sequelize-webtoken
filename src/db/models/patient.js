@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     id_document: DataTypes.STRING,
     pathology: DataTypes.STRING
   }, {
+    timestamps: false,
     paranoid: true,
     underscored: true
   });

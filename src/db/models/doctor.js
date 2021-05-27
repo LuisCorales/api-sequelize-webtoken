@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     surname: DataTypes.STRING,
     speciality: DataTypes.STRING,
   }, {
+    timestamps: false,
     paranoid: true,
     underscored: true
   });
