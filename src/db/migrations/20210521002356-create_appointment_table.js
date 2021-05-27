@@ -52,10 +52,10 @@ module.exports = {
           model: "patients",
           key: "id"
         },
-      }
-    }, {
-      paranoid: true,
-      underscored: true,
+      },
+      created_at: Sequelize.DATE,
+      updated_at: Sequelize.DATE,
+      deleted_at: Sequelize.DATE,
     });
   },
 
