@@ -5,7 +5,6 @@ module.exports = (sequelize, DataTypes) => {
     start_time: DataTypes.DATE,
     end_time: DataTypes.DATE
   }, {
-    timestamps: false,
     paranoid: true,
     underscored: true
   });

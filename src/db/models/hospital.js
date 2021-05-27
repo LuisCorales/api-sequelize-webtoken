@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
   const Hospital = sequelize.define('Hospital',{
     name: DataTypes.STRING
   }, {
-    timestamps: false,
+    deleted_at: false,
     paranoid: true,
     underscored: true
   });
