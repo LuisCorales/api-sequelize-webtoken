@@ -9,7 +9,7 @@ module.exports.post = async (req, res) => {
             where: {
                 username: req.body.username
             }
-        })
+        });
     
         // If there are no users with the same username, throw error
         if(user.length < 1) {
