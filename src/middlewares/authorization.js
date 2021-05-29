@@ -24,6 +24,6 @@ exports.verifyToken = (req, res, next) => {
 
         next();
     } catch(e) {
-        return res.sendStatus(403);
+        return res.sendStatus(401);
     }
 };
