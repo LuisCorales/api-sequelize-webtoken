@@ -1,25 +1,20 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const { User } = require('../db/models/index')
 
 /** To POST authorization route, login */
 module.exports.post = async (req, res) => {
     try {
-        const user = await User.findAll({
-            where: {
-                username: req.body.username
-            }
-        });
-    
         // If there are no users with the same username, throw error
-        if(user.length < 1) {
+        if(!req.userExists) {
             throw new Error;
         }
 
-        bcrypt.compare(req.body.password, user[0].password, (err, result) => {
+        bcrypt.compare(req.body.password, req.userPassword, (err, result) => {
             if (err) {
                 return res.sendStatus(401);
             }
+
+            const user = req.user;
 
             // If they are the same, create token
             if (result) {

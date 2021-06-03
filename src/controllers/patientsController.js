@@ -5,7 +5,7 @@ module.exports.getAll = async (req, res) => {
     try{
         const result = await Patient.findAll();
 
-        return res.status(200).send(result);
+        return res.sendStatus(200);
     } catch(e) {
         return res.sendStatus(500);
     }
@@ -14,23 +14,15 @@ module.exports.getAll = async (req, res) => {
 /** To POST patients route */
 module.exports.post = async (req, res) => {
     try{
-        const patients = await Patient.findAll({
-            where: {
-                id_document: req.body.id_document
-            }
-        });
-
-        var result;
-
-        if(patients == 0) {
-            result = await Patient.create({
+        if(!req.patientExists) {
+            const result = await Patient.create({
                 firstname: req.body.firstname,
                 surname: req.body.surname,
                 id_document: req.body.id_document,
                 pathology: req.body.pathology
             });
         } else {
-            result = await Patient.update({
+            const result = await Patient.update({
                 pathology: req.body.pathology
             }, {
                 where: {
@@ -39,7 +31,7 @@ module.exports.post = async (req, res) => {
             });
         }
         
-        return res.status(200).send(result);
+        return res.sendStatus(200);
     } catch(e) {
         return res.sendStatus(500);
     }
@@ -50,7 +42,7 @@ module.exports.getOne = async (req, res) => {
     try{
         const result = await Patient.findByPk(req.params.id);
 
-        return res.status(200).send(result);
+        return res.sendStatus(200);
     } catch(e) {
         return res.sendStatus(500);
     }
@@ -67,7 +59,7 @@ module.exports.put = async (req, res) => {
             }
         });
         
-        return res.status(200).send(result);
+        return res.sendStatus(200);
     } catch(e) {
         return res.sendStatus(500);
     }
@@ -82,7 +74,7 @@ module.exports.delete = async (req, res) => {
             }
         });
 
-        return res.status(200).send(result);
+        return res.sendStatus(200);
     } catch(e) {
         return res.sendStatus(500);
     }

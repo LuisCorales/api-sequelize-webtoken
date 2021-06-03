@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const patientsMiddlewares = require("../../middlewares/patientsMiddlewares");
 
 const patientsController = require("../../controllers/patientsController");
 
@@ -7,7 +8,7 @@ const patientsController = require("../../controllers/patientsController");
 router.get("/", patientsController.getAll);
 
 // POST a new patient
-router.post("/", patientsController.post);
+router.post("/", patientsMiddlewares.verifyIfPatientExists, patientsController.post);
 
 // GET a patient by id
 router.get("/:id", patientsController.getOne);

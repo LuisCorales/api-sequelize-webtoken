@@ -16,10 +16,6 @@ module.exports = {
           isDate: {
             args: true,
             msg: "start_time can only be a date."
-          },
-          isAfter: {
-            args: new Date(new Date().setDate(new Date().getDate() - 1)).toDateString(),
-            msg: "start_time cannot be start before today."
           }
         }
       },
@@ -30,10 +26,6 @@ module.exports = {
           isDate: {
             args: true,
             msg: "end_time can only be a date."
-          }, 
-          isAfter: {
-            args: new Date(new Date().setDate(new Date().getDate() - 1)).toDateString(),
-            msg: "end_time cannot end before today."
           }
         }
       },

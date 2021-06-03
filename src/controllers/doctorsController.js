@@ -10,7 +10,7 @@ module.exports.getAll = async (req, res) => {
             }
         });
 
-        return res.status(200).send(result);
+        return res.sendStatus(200);
     } catch(e) {
         return res.sendStatus(500);
     }
@@ -26,7 +26,7 @@ module.exports.post = async (req, res) => {
             hospital_id: req.body.hospital_id
         });
 
-        return res.status(200).send(result);
+        return res.sendStatus(200);
     } catch(e) {
         return res.sendStatus(500);
     }
@@ -42,7 +42,7 @@ module.exports.getOne = async (req, res) => {
             }
         });
 
-        return res.status(200).send(result);
+        return res.sendStatus(200);
     } catch(e) {
         return res.sendStatus(500);
     }
@@ -62,7 +62,7 @@ module.exports.put = async (req, res) => {
             }
         });
 
-        return res.status(200).send(result);
+        return res.sendStatus(200);
     } catch(e) {
         return res.sendStatus(500);
     }
@@ -77,7 +77,7 @@ module.exports.delete = async (req, res) => {
             }
         });
 
-        return res.status(200).send(result);
+        return res.sendStatus(200);
     } catch(e) {
         return res.sendStatus(500);
     }

@@ -1,4 +1,29 @@
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const { User } = require('../db/models/index')
+
+/** Verify if the user already exists */
+exports.verifyIfUserExists = async (req, res, next) => {
+    try{
+        const users = await User.findAll({
+            where: {
+                username: req.body.username
+            }
+        });
+
+        if(users.length > 0) {
+            req.userExists = true;
+            req.user = users;
+            req.userPassword = users[0].password;
+        } else {
+            req.userExists = false;
+        }
+
+        next();
+    } catch(e) {
+        return res.sendStatus(401);
+    }
+};
+
 
 /** Verify the token attached to the request */
 exports.verifyToken = (req, res, next) => {

@@ -4,14 +4,7 @@ const { User } = require('../db/models/index');
 /** To POST user route, signup or register */
 module.exports.post = async (req, res) => {
     try{
-        const users = await User.findAll({
-            where: {
-                username: req.body.username
-            }
-        });
-
-        // If there is one user with same username, throw error
-        if(users.length > 0) {
+        if(req.userExists) {
             throw new Error;
         }
 
@@ -29,6 +22,6 @@ module.exports.post = async (req, res) => {
 
         return res.sendStatus(200);
     } catch(e) {
-        return res.sendStatus(500);
+        return res.sendStatus(401);
     }
 }

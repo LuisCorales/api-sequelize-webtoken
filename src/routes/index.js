@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {verifyToken} = require('../middlewares/authorization');
+const {verifyToken} = require('../middlewares/authMiddlewares');
 
 const authorizationRoutes = require('./authorization')
 const dashboardRoutes = require('./dashboard')
