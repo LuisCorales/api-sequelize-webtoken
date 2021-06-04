@@ -19,7 +19,8 @@ module.exports.post = async (req, res) => {
                 firstname: req.body.firstname,
                 surname: req.body.surname,
                 id_document: req.body.id_document,
-                pathology: req.body.pathology
+                pathology: req.body.pathology,
+                user_id: 1 //TODO: user_id
             });
         } else {
             const result = await Patient.update({

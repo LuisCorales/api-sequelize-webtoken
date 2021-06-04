@@ -16,7 +16,8 @@ module.exports.post = async (req, res) => {
 
             const result = await User.create({
                 username: req.body.username,
-                password: hash
+                password: hash,
+                role: req.body.role
             });
         });
 

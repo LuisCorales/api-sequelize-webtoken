@@ -1,14 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const patientsMiddlewares = require("../../middlewares/patientsMiddlewares");
-
+const {verifyIfPatientExists} = require("../../middlewares/patientsMiddlewares");
 const patientsController = require("../../controllers/patientsController");
 
 // GET all patients
 router.get("/", patientsController.getAll);
 
 // POST a new patient
-router.post("/", patientsMiddlewares.verifyIfPatientExists, patientsController.post);
+router.post("/", verifyIfPatientExists, patientsController.post);
 
 // GET a patient by id
 router.get("/:id", patientsController.getOne);

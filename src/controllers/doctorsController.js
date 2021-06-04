@@ -23,7 +23,8 @@ module.exports.post = async (req, res) => {
             firstname: req.body.firstname,
             surname: req.body.surname,
             speciality: req.body.speciality,
-            hospital_id: req.body.hospital_id
+            hospital_id: req.body.hospital_id,
+            user_id: 2 //TODO: user_id
         });
 
         return res.sendStatus(200);
