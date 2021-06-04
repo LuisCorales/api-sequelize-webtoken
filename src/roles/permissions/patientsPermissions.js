@@ -1,8 +1,10 @@
-const ROLE = require('../roles');
+const {ROLE} = require('../roles');
 
-exports.canViewPatient = (user, patient) => {
+// TODO: Relacionar el patient con el usuario, y que ese usuario si es paciente, solo 
+// pueda ver su perfil de patient
+exports.canManagePatients = (userRole) => {
     return (
-        user.dataValues.role === ROLE.ADMIN ||
-        patient.dataValues.id === user.dataValues.id
+        userRole === ROLE.ADMIN ||
+        userRole === ROLE.PATIENT
     )
-}
+};

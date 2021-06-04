@@ -1,5 +1,7 @@
 const {Patient} = require('../db/models/index');
 
+const {canManagePatients} = require("../roles/permissions/patientsPermissions");
+
 /** Verify if patient already exists */
 exports.verifyIfPatientExists = async (req, res, next) => {
     try{
@@ -20,3 +22,11 @@ exports.verifyIfPatientExists = async (req, res, next) => {
         return res.sendStatus(401);
     }
 };
+
+exports.authManagePatients = (req, res, next) => {
+    if(!canManagePatients(req.userRole)) {
+        return res.sendStatus(401);
+    }
+
+    next();
+}; 

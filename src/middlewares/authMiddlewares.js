@@ -26,14 +26,14 @@ exports.verifyIfUserExists = async (req, res, next) => {
 
 
 /** Verify the token attached to the request */
-exports.verifyToken = (req, res, next) => {
+exports.verifyToken = async (req, res, next) => {
     try{
         // Get the auth header value
         const bearerHeader = req.headers['authorization'];
 
         // Check if undefined
         if(typeof bearerHeader === 'undefined') {
-            // Send 403 error: Forbidden
+            // Send 401 error: unauthorized
             throw new error;
         }
 
@@ -46,6 +46,8 @@ exports.verifyToken = (req, res, next) => {
                 throw err;
             }
         });
+
+        req.userRole = jwt.decode(req.token, "secretkey").user[0].role;
 
         next();
     } catch(e) {
