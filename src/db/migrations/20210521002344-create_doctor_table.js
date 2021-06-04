@@ -55,6 +55,11 @@ module.exports = {
           key: "id"
         }
       },
+      user_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        unique: true
+      },
       created_at: Sequelize.DATE,
       updated_at: Sequelize.DATE,
       deleted_at: Sequelize.DATE,

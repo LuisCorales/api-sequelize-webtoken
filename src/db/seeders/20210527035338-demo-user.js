@@ -3,8 +3,9 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert('users', [{
-      username: 'username',
-      password: 'password',
+      username: 'luis',
+      password: '12345',
+      role: require('../../roles/roles').ROLE.ADMIN
     }]);
   },
 
