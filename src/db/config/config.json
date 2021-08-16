@@ -1,21 +1,21 @@
 {
   "development": {
     "username": "root",
-    "password": "123456",
+    "password": "12345",
     "database": "hospitaldb_dev",
     "host": "localhost",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
-    "password": "123456",
+    "password": "12345",
     "database": "hospitaldb_test",
     "host": "localhost",
     "dialect": "mysql"
   },
   "production": {
     "username": "root",
-    "password": "123456",
+    "password": "12345",
     "database": "hospitaldb",
     "host": "localhost",
     "dialect": "mysql"

@@ -6,7 +6,8 @@ module.exports = {
       username: 'luis',
       password: '12345',
       role: require('../../roles/roles').ROLE.ADMIN
-    }]);
+    }
+  ]);
   },
 
   down: async (queryInterface, Sequelize) => {

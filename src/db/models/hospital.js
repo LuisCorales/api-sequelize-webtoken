@@ -11,6 +11,8 @@ module.exports = (sequelize, DataTypes) => {
 
   Hospital.associate = (models) => {
     Hospital.hasMany(models.Doctor, {foreignKey: 'hospital_id', as: "doctor"});
+
+    Hospital.hasOne(models.User, {foreignKey: 'hospital_id', as: "user"});
   }
 
   return Hospital;

@@ -10,5 +10,11 @@ module.exports = (sequelize, DataTypes) => {
     underscored: true
   });
 
+  User.associate = (models) => {
+    User.belongsTo(models.Doctor, {foreignKey: "doctor_id"});
+    User.belongsTo(models.Patient, {foreignKey: "patient_id"});
+    User.belongsTo(models.Hospital, {foreignKey: "hospital_id"});
+  }
+
   return User;
 };

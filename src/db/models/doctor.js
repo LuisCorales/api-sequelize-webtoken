@@ -13,6 +13,8 @@ module.exports = (sequelize, DataTypes) => {
   Doctor.associate = (models) => {
     Doctor.belongsTo(models.Hospital, {foreignKey: 'hospital_id', as: "hospital"});
     Doctor.hasOne(models.Appointment, {foreignKey: 'doctor_id', as: "appointment"});
+
+    Doctor.hasOne(models.User, {foreignKey: 'doctor_id', as: "user"});
   }
 
   return Doctor;

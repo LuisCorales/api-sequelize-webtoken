@@ -36,6 +36,30 @@ module.exports = {
           }
         }
       },
+      doctor_id: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references: {
+          model: "doctors",
+          key: "id"
+        }
+      },
+      hospital_id: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references: {
+          model: "hospitals",
+          key: "id"
+        }
+      },
+      patient_id: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references: {
+          model: "patients",
+          key: "id"
+        }
+      },
       created_at: Sequelize.DATE,
       updated_at: Sequelize.DATE,
       deleted_at: Sequelize.DATE,

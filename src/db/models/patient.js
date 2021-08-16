@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
 
   Patient.associate = (models) => {
     Patient.hasOne(models.Appointment, {foreignKey: "patient_id", as: "appointment"});
+    Patient.hasOne(models.User, {foreignKey: 'patient_id', as: "user"});
   }
 
   return Patient;
